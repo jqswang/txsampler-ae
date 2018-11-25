@@ -48,4 +48,14 @@ Evaluations
    ```
    measure_speedup.py --help
    ```
+1. Profile analysis
+   There are quite a few case studies in the paper and appendix.
+   You may use the following command to produce a profile database of an application which interests you most.
+   Suppose you want to profile dedup.
+   ```
+   generate_profile.py dedup
+   ```
+   The script output will tell you where the database directory is generated.
+   Copy the database to whereever you want and use hpcview(download it from [here](http://hpctoolkit.org/software.html)) to view.
    
+
