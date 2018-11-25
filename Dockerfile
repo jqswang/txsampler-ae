@@ -76,7 +76,7 @@ RUN chmod a+x /opt/script/*
 ENV PATH="/opt/script:${PATH}"
 
 # for debug
-RUN apt-get install \
+RUN apt-get -y -q install \
   vim \
   && apt-get clean autoclean \
   && apt-get autoremove --yes \
