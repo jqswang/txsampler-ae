@@ -1,8 +1,10 @@
 # 14.04
 FROM ubuntu:trusty
 
+# depedencies we can get from apt-get
 RUN apt-get update && apt-get -y -q install \
   autoconf \
+  build-essential \
   bzip2 \
   cmake \
   file \
@@ -25,12 +27,17 @@ RUN apt-get update && apt-get -y -q install \
   pkg-config \
   psmisc \
   python \
+  python-dev \
+  python-pip \
   time \
   unzip \
   zlib1g-dev \
   && apt-get clean autoclean \
   && apt-get autoremove --yes \
   && rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+# install python pacakges
+RUN pip install tqdm
 
 RUN mkdir -p /opt/script
 
@@ -67,5 +74,13 @@ COPY script/* /opt/script/
 RUN chmod a+x /opt/script/*
 
 ENV PATH="/opt/script:${PATH}"
+
+# for debug
+RUN apt-get install \
+  vim \
+  && apt-get clean autoclean \
+  && apt-get autoremove --yes \
+  && rm -rf /var/lib/{apt,dpkg,cache,log}/
+
 
 CMD /bin/bash
