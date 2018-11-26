@@ -17,6 +17,7 @@ RUN apt-get update && apt-get -y -q install \
   libbz2-dev \
   libevent-dev \
   libfftw3-dev \
+  libfreetype6-dev \
   liblapacke-dev \
   libnuma-dev \
   libpng-dev \
@@ -37,7 +38,7 @@ RUN apt-get update && apt-get -y -q install \
   && rm -rf /var/lib/{apt,dpkg,cache,log}/
 
 # install python pacakges
-RUN pip install tqdm
+RUN pip install tqdm numpy matplotlib==2.2
 
 RUN mkdir -p /opt/script
 
