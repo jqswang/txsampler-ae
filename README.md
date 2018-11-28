@@ -39,6 +39,15 @@ Setups
    
 Evaluations
 ============
+1. Overhead of TxSampler
+   ```
+   $ measure_overhead.py all
+   ```
+   It will measure the the overhead of all the applications, present the result in the standard output and generate a figure (named ```output.pdf```) similar to Figure 5 in the current working directory.
+   You can see more options here:
+   ```
+   $ measure_overhead.py --help
+   ```   
 1. Speedup of optimized applications
    ```
    measure_speedup.py all
@@ -56,6 +65,10 @@ Evaluations
    generate_profile.py dedup
    ```
    The script output will tell you where the database directory is generated.
-   Copy the database to whereever you want and use hpcview(download it from [here](http://hpctoolkit.org/software.html)) to view.
+   Copy the database to whereever you want and use hpcview(download it from [here](http://hpctoolkit.org/software.html)) to open the database directory.
+   You can see more options here:
+   ```
+   generate_profile.py --help
+   ```
    
 
