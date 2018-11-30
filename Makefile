@@ -8,7 +8,7 @@ build: Dockerfile
 
 start:
 	mkdir -p mydata
-	sudo docker run --cap-add sys_admin --name=$(INSTANCE_NAME) -v $(shell pwd)/mydata:/data -dit $(IMAGE_NAME)
+	sudo docker run --cap-add sys_ptrace --cap-add sys_admin --security-opt seccomp=unconfined --name=$(INSTANCE_NAME) -v $(shell pwd)/mydata:/data -dit $(IMAGE_NAME)
 	sudo docker attach $(INSTANCE_NAME) 
 
 restart:
