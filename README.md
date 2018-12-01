@@ -7,6 +7,9 @@ Setups
 ============
 
 1. Build and launch the docker image
+   
+   **Note:** You will need root privilege to use [Docker](https://www.docker.com/).
+   You may refer to the [document](https://docs.docker.com/install/#supported-platforms) to install it if Docker is not available on your system.
    1. Download this repository
     
        ```$ git clone https://github.com/jqswang/txsampler-ae.git```
@@ -23,6 +26,14 @@ Setups
       ```
       Then you will see the bash terminal inside the container. Now you have finished building the environment.
       Whenever you want to exit the container, use ```$ exit``` inside the container. You can come back by using ```$ make restart``` from the host.
+      
+      The directory ```./mydata``` on the host system is mapped to ```/data``` inside the container and you may utilize it to transfer files between the host and the container. It is also recommended to perform all the experiments under ```/data``` or its subdirectories.
+      
+   1. *(optional) Rebuild the image
+      
+      In case you want to rebuild the image, temporally move ```./mydata``` out of the current directory; otherwise you will experience significant slow-down.
+      When finished, put ```mydata``` back under the current directory.
+      
 1. Download the benchmark and input.
    
    Now you are inside the container.
@@ -30,12 +41,24 @@ Setups
    ```
    $ get_benchmark_and_input.sh
    ```
+   The input file is quite large and it may take 15mins to finish the decompression.
+   
    You will see a folder ```/data/txsampler_benchmark```.
    Let's go there to set some environmental variables:
    ```
    $ cd /data/txsampler_benchmark
    $ source set_env
    ```
+1. Modify the ```run.conf``` file
+   You need to edit ```/data/txsampler_benchmark/run.conf``` to fit your current platform. There are two fields you need to set:
+   
+   `num_threads`: the number of threads you want to launch for each application (not applicable to PARSEC)
+   
+   `cpu_list`: the CPUs that the launched application will run on (e.g., `1,2,3,4`, `1-4`)
+   
+   It is recommended to run all the experiments in one single NUMA node and fully occupy every core of this NUMA node.
+   
+   
    
 Evaluations
 ============
