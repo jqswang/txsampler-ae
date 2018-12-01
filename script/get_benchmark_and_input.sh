@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "Download the benchmark suite ..."
 git clone https://github.com/jqswang/txsampler_benchmark.git /data/txsampler_benchmark
+cd /data/txsampler_benchmark && git fetch && git checkout -b new origin/new
 cd /data/txsampler_benchmark/lib && make
 
 echo "Download the benchmark input and decompress it ... It may take long time..."
