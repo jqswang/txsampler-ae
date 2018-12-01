@@ -90,7 +90,32 @@ For all the scripts introduced below, you can use `--help` option to view all th
    generate_profile.py dedup
    ```
    The script output will tell you where the database directory is generated.
-   Copy the database to whereever you want and use hpcview(download it from [here](http://hpctoolkit.org/software.html)) to open the database directory.
+   Copy the database to whereever you want and use `hpcviewer`(download it from [here](http://hpctoolkit.org/software.html)) to open the database directory.
    
    We have also prepared the database of dedup we generated, and you can download it [here](https://drive.google.com/open?id=1uKVT9eNEJ6MimwYtGFDF_-Xsmd2DOdo_). 
+   
+   In `hpcviewer`, each metric is displayed in two columns, inclusively (ending with "(I)") and exclusively (ending with "(E)").
+   One usually uses the inclusive version for analysis.
+   The metric names shown in the metric pane are explained below:
+   * `cycles` or `cycles:precise=2`: the CPU cycles for execution
+   * `TIME_IN_HTM`: the CPU cycles spent in transaction
+   * `TIME_IN_FALLBACK`: the CPU cycles spent in the fallback path of a critical section
+   * `TIMEIN_LOCK_WAITING`: the CPU cycles spent in waiting for the global lock to be free
+   * `TIMEIN_OTHER_TX`: the CPU cycles spent in initiating or cleaning up a transaction
+   * `RTM_RETIRED:COMMIT`: the number of transactions committed
+   * `RTM_RETIRED:ABORTED`: the number of transactions aborted
+   * `HTM_WEIGHT`: the CPU cycles wasted by executing aborted transactions
+   * `HTM_CONFLICT`: the number of aborted transactions due to memory contention
+   * `HTM_CONFLICT_WEIGHT`: the CPU cycles wasted by executing aborted transactions due to memory contention
+   * `HTM_CAPACITY_READ`: the number of aborted transactions due to execeeding the read buffer
+   * `HTM_CAPACITY_READ_WEIGHT`: the CPU cycles wasted by executing aborted transactions due to execeeding the read buffer
+   * `HTM_CAPACITY_WRITE`: the number of aborted transactions due to execeeding the write buffer
+   * `HTM_CAPACITY_WRITE_WEIGHT`: the CPU cycles wasted by executing aborted transactions due to execeeding the write buffer
+   * `HTM_SYNC`: the number of synchronous aborts
+   * `HTM_SYNC_WEIGHT`: the CPU cycles wasted due to synchronous aborts
+   * `HTM_ASYNC`: the number of asynchronous aborts
+   * `HTM_ASYNC_WEIGHT`: the CPU cycles wasted due to asynchronous aborts
+   * `MEM_UOPS_RETIRED:ALL_STORES`: the number of store instructions
+   * `MEM_UOPS_RETIRED:ALL_LOADS`: the number of load instructions
+   * `FALSE_SHARING`: the number of times when false sharing happens
 
