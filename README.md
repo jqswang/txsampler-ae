@@ -68,24 +68,20 @@ Setups
    
 Evaluations
 ============
+For all the scripts introduced below, you can use `--help` option to view all the available options. It is also recommended to use `--verbose` for all experiments so that you could keep track of the progress.
+
 1. Overhead of TxSampler
    ```
    $ measure_overhead.py all
    ```
    It will measure the the overhead of all the applications, present the result in the standard output and generate a figure (named ```output.pdf```) similar to Figure 5 in the current working directory.
-   You can see more options here:
-   ```
-   $ measure_overhead.py --help
-   ```   
+
 1. Speedup of optimized applications
    ```
    measure_speedup.py all
    ```
    The script will run all the applications shown in Table 1 in the paper and calculate the speedup.
-   You can see more options here:
-   ```
-   measure_speedup.py --help
-   ```
+
 1. Profile analysis
    There are quite a few case studies in the paper and appendix.
    You may use the following command to produce a profile database of an application which interests you most.
@@ -95,9 +91,6 @@ Evaluations
    ```
    The script output will tell you where the database directory is generated.
    Copy the database to whereever you want and use hpcview(download it from [here](http://hpctoolkit.org/software.html)) to open the database directory.
-   You can see more options here:
-   ```
-   generate_profile.py --help
-   ```
    
+   We have also prepared the database of dedup we generated, and you can download it [here](https://drive.google.com/open?id=1uKVT9eNEJ6MimwYtGFDF_-Xsmd2DOdo_). 
 
