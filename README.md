@@ -41,7 +41,7 @@ Setups
    ```
    $ get_benchmark_and_input.sh
    ```
-   The input file is quite large and it may take 15mins to finish the decompression.
+   The input file is quite large and it may take 15 mins or longer to finish the decompression.
    
    You will see a folder ```/data/txsampler_benchmark```.
    Let's go there to set some environmental variables:
@@ -56,7 +56,13 @@ Setups
    
    `cpu_list`: the CPUs that the launched application will run on (e.g., `1,2,3,4`, `1-4`)
    
-   It is recommended to run all the experiments in one single NUMA node and fully occupy every core of this NUMA node.
+   It is recommended to run all the experiments in one single NUMA node and fully occupy every core of this NUMA node. Probably you can use the following commands to help you decide:
+   ```
+   # Set num_threads to the output from the following command:
+   $ lscpu | grep "Core(s) per socket" | awk '{print $NF}'
+   # Set cpu_list to the output from the following command:
+   $ lscpu | grep "NUMA node0" | awk '{print $NF}' | cut -d',' -f1-$(lscpu | grep "Core(s) per socket" | awk '{print $NF}')
+   ```
    
    
    
