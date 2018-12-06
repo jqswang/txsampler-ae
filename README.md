@@ -119,3 +119,17 @@ For all the scripts introduced below, you can use `--help` option to view all th
    * `MEM_UOPS_RETIRED:ALL_LOADS`: the number of load instructions
    * `FALSE_SHARING`: the number of times when false sharing happens
 
+Known Issues
+============
+1. "mkdir" error in Centos/RHEL when running the container
+
+   ```
+   docker: Error response from daemon: mkdir /var/lib/docker/overlay/b42808971145d8e6686512d55e192b9531a73794b9f30c7ae02941781bc91776-init/merged/dev/shm: invalid argument.
+   ```
+   Edit the file ```/etc/docker/daemon.json``` (create one if it does not exist) and add the following content:
+   ```
+   {
+   "storage-driver": "devicemapper"
+   }
+   ```
+   Restart the docker service by ```sudo service docker restart```.
