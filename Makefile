@@ -16,7 +16,7 @@ restart:
 	sudo docker attach $(INSTANCE_NAME)
 
 clean:
-	sudo docker stop test-ubuntu || true
+	sudo docker stop $(INSTANCE_NAME) || true
 	sudo docker rm $(INSTANCE_NAME)
 
 allclean:
