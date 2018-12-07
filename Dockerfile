@@ -64,6 +64,8 @@ COPY script/* /opt/script/
 
 RUN chmod a+x /opt/script/*
 
+RUN useradd memcached-user
+
 ENV PATH="/opt/script:${PATH}"
 
 # for debug
