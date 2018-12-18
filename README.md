@@ -83,6 +83,7 @@ For all the scripts introduced below, you can use `--help` option to view all th
    The script will run all the applications shown in Table 1 in the paper and calculate the speedup.
 
 1. Profile analysis
+
    There are quite a few case studies in the paper and appendix.
    You may use the following command to produce a profile database of an application which interests you most.
    Suppose you want to profile dedup.
@@ -118,6 +119,40 @@ For all the scripts introduced below, you can use `--help` option to view all th
    * `MEM_UOPS_RETIRED:ALL_STORES`: the number of store instructions
    * `MEM_UOPS_RETIRED:ALL_LOADS`: the number of load instructions
    * `FALSE_SHARING`: the number of times when false sharing happens
+
+Usage of TxSampler
+============
+TxSampler is integrated into [hpctoolkit](http://hpctoolkit.org/) and the usage details are documented [here](http://hpctoolkit.org/manual/HPCToolkit-users-manual.pdf).
+TxSampler is already properly installed inside the docker container.
+The general usage contains three steps:
+1. Generate profiles
+   ```
+   $ hpcrun -e [event]@[sampling_period] [program_executable] [program_arguments]
+   ```
+   It produces a measurement directory whose name is like hpctoolkit-*-measurements.
+   One may add any number of events according to the actual need.
+1. Analyze the executable
+   ```
+   $ hpcstruct [program_executable]
+   ```
+   It generates a ```.hpcstruct``` file.
+1. Generate the database which can be viewed in [hpcviewer](http://hpctoolkit.org/download/hpcviewer/).
+   ```
+   $ hpcprof -o [database_name] -S [hpcstruct_file] -I [directory_containing_source_files] [measurement_directory]
+   ```
+   ```directory_containing_source_files``` helps ```hpcprof``` to find the source files which are used to build this ```program_executable```
+   
+Suppose we have a ```hello``` program whose source files are under current working directory.
+We can just use ```./hello -all``` to launch the program if no profiling is required.
+In order to use TxSampler, we could do
+```
+$ hpcrun -e cycles@1000000 -e RTM_RETIRED:ABORTED@50000 -e RTM_RETIRED:COMMIT@50000 ./hello -all
+$ hpcstruct hello
+$ hpcprof -o hpctoolkit-hello-database -S hello.hpcstruct -I ./ hpctoolkit-hello-measurements
+```
+
+
+
 
 Known Issues
 ============
